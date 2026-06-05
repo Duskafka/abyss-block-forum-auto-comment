@@ -2,8 +2,7 @@ name: Self-Account Forum Bumper
 
 on:
   schedule:
-    # 안전을 위해 4시간마다 한 번씩 실행 (하루 6번)
-    - cron: '0 */4 * * *'
+    - cron: '13 */4 * * *' # 4시간 13분마다
   workflow_dispatch:
 
 jobs:
