@@ -1,0 +1,29 @@
+name: Self-Account Forum Bumper
+
+on:
+  schedule:
+    # 안전을 위해 4시간마다 한 번씩 실행 (하루 6번)
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Requests
+      run: pip install requests
+
+    - name: Run Self Bumper
+      env:
+        USER_TOKEN: ${{ secrets.USER_TOKEN }}
+        FORUM_POST_ID: ${{ secrets.FORUM_POST_ID }}
+      run: python self_bump.py
